@@ -1,1 +1,1 @@
-# php-merchant-sdk
+# COINQVEST Merchant SDK (PHP)
