@@ -164,7 +164,7 @@ $response = $client->post('/withdrawal', array(
     'sourceAmount' => '100',
     'targetNetwork' => 'XLM', // send to a Stellar account
     'targetAccount' => array(
-        'account' => 'GASKYWPPQ2VSO6KNIPIRVXMSSDGZLYZQ67CDTLVXOXYDG26SPZ66EDCQ',
+        'account' => 'GDONUHZKLSYLDOZWR2TDW25GFXOBWCCKTPK34DLUVSOMFHLGURX6FNU6',
         'memo' => 'Exodus',
         'memoType' => 'text'
     )
