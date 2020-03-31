@@ -122,6 +122,16 @@ if ($response->httpStatusCode == 200) {
 }
 ```
 
+**Query your USD Wallet** (https://www.coinqvest.com/en/api-docs#get-wallet)
+```php
+$response = $client->get('/wallet', array('assetCode' => 'USD'));
+```
+
+**Query all Wallets** (https://www.coinqvest.com/en/api-docs#get-wallets)
+```php
+$response = $client->get('/wallets');
+```
+
 **Withdraw to your NGN Bank Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
 ```php
 $response = $client->post('/withdrawal', array(
@@ -159,16 +169,6 @@ $response = $client->post('/withdrawal', array(
         'memoType' => 'text'
     )
 ));
-```
-
-**Query your USD Wallet** (https://www.coinqvest.com/en/api-docs#get-wallet)
-```php
-$response = $client->get('/wallet', array('assetCode' => 'USD'));
-```
-
-**Query all Wallets** (https://www.coinqvest.com/en/api-docs#get-wallets)
-```php
-$response = $client->get('/wallets');
 ```
 
 **Update a Customer** (https://www.coinqvest.com/en/api-docs#put-customer)
