@@ -4,7 +4,7 @@ Official COINQVEST Merchant API SDK for PHP by www.coinqvest.com
 
 This SDK implements the REST API documented at https://www.coinqvest.com/en/api-docs
 
-For SDKs in different languages, see https://www.coinqvest.com/en/api-docs#sdks
+For SDKs in different programming languages, see https://www.coinqvest.com/en/api-docs#sdks
 
 Read our Merchant API [development guide](https://www.coinqvest.com/en/blog/guide-mastering-cryptocurrency-checkouts-with-coinqvest-merchant-apis-321ac139ce15) and the examples below to help you get started.
 
@@ -29,7 +29,7 @@ Get your API key and secret here: https://www.coinqvest.com/en/api-settings
 
 ## Examples
 
-**Creating a Customer** (https://www.coinqvest.com/en/api-docs#post-customer)
+**Create a Customer** (https://www.coinqvest.com/en/api-docs#post-customer)
 
 Creates a customer object, which can be associated with checkouts, payments and invoices. Checkouts associated with a customer generate more transaction details, help with your accounting and can automatically create invoices for your customer and yourself.
 
@@ -54,7 +54,7 @@ if ($response->httpStatusCode == 200) {
 }
 ```
 
-**Creating a Hosted Checkout** (https://www.coinqvest.com/en/api-docs#post-checkout-hosted)
+**Create a Hosted Checkout** (https://www.coinqvest.com/en/api-docs#post-checkout-hosted)
 
 Hosted checkouts are the simplest form of getting paid using the COINQVEST platform. 
 
@@ -104,7 +104,7 @@ if ($response->httpStatusCode == 200) {
 }
 ```
 
-**Monitoring Payment State** (https://www.coinqvest.com/en/api-docs#get-checkout)
+**Monitor Payment State** (https://www.coinqvest.com/en/api-docs#get-checkout)
 
 Once the payment is captured we notify you via email, [WEBHOOK /payment](https://www.coinqvest.com/en/api-docs#webhook-payment), or you can poll [GET /checkout](https://www.coinqvest.com/en/api-docs#get-checkout) for payment status updates:
 
@@ -122,17 +122,56 @@ if ($response->httpStatusCode == 200) {
 }
 ```
 
-**Querying USD Wallet** (https://www.coinqvest.com/en/api-docs#get-wallet)
+**Withdraw to your NGN Bank Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
+```php
+$response = $client->post('/withdrawal', array(
+    'sourceAsset' => 'USD:GDUKMGUGDZQK6YHYA5Z6AY2G4XDSZPSZ3SW5UN3ARVMO6QSRDWP5YLEX', // withdraw from your USD wallet
+    'sourceAmount' => '100',
+    'targetNetwork' => 'NGN', // send to a NGN bank account
+    'targetAccount' => array(
+        'nuban' => '3080494548',
+        'bankName' => 'FirstBank'
+    )
+));
+```
+
+**Withdraw to your Bitcoin Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
+```php
+$response = $client->post('/withdrawal', array(
+    'sourceAsset' => 'USD:GDUKMGUGDZQK6YHYA5Z6AY2G4XDSZPSZ3SW5UN3ARVMO6QSRDWP5YLEX', // withdraw from your USD wallet
+    'sourceAmount' => '100',
+    'targetNetwork' => 'BTC', // send to a BTC address
+    'targetAccount' => array(
+        'address' => 'bc1qj633nx575jm28smgcp3mx6n3gh0zg6ndr0ew23'
+    )
+));
+```
+
+**Withdraw to your Stellar Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
+```php
+$response = $client->post('/withdrawal', array(
+    'sourceAsset' => 'USD:GDUKMGUGDZQK6YHYA5Z6AY2G4XDSZPSZ3SW5UN3ARVMO6QSRDWP5YLEX', // withdraw from your USD wallet
+    'sourceAmount' => '100',
+    'targetNetwork' => 'XLM', // send to a Stellar account
+    'targetAccount' => array(
+        'account' => 'GASKYWPPQ2VSO6KNIPIRVXMSSDGZLYZQ67CDTLVXOXYDG26SPZ66EDCQ',
+        'memo' => 'Exodus',
+        'memoType' => 'text'
+    )
+));
+```
+
+**Query your USD Wallet** (https://www.coinqvest.com/en/api-docs#get-wallet)
 ```php
 $response = $client->get('/wallet', array('assetCode' => 'USD'));
 ```
 
-**Querying all Wallets** (https://www.coinqvest.com/en/api-docs#get-wallets)
+**Query all Wallets** (https://www.coinqvest.com/en/api-docs#get-wallets)
 ```php
 $response = $client->get('/wallets');
 ```
 
-**Updating a Customer** (https://www.coinqvest.com/en/api-docs#put-customer)
+**Update a Customer** (https://www.coinqvest.com/en/api-docs#put-customer)
 ```php
 $response = $client->post('/customer', array(
     'customer' => array(
@@ -142,13 +181,28 @@ $response = $client->post('/customer', array(
 ));
 ```
 
-**Deleting a Customer** (https://www.coinqvest.com/en/api-docs#delete-customer)
+**Delete a Customer** (https://www.coinqvest.com/en/api-docs#delete-customer)
 ```php
 $response = $client->delete('/customer', array(
     'customer' => array(
         'id' => 'fd4f47a50c7f'
     )
 ));
+```
+
+**List your 250 newest customers** (https://www.coinqvest.com/en/api-docs#get-customers)
+```php
+$response = $client->get('/customers', array('limit' => 250);
+```
+
+**List all available blockchains** (https://www.coinqvest.com/en/api-docs#get-blockchains)
+```php
+$response = $client->get('/blockchains');
+```
+
+**List all available fiat currencies** (https://www.coinqvest.com/en/api-docs#get-fiat-currencies)
+```php
+$response = $client->get('/fiat-currencies');
 ```
 
 Please inspect https://www.coinqvest.com/en/api-docs for detailed API documentation or send us an email to service@coinqvest.com.
