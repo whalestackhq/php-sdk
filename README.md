@@ -16,7 +16,7 @@ Requirements
 
 Installation as Drop-In
 -----------------------
-Copy the contents of `src` into the include path of your project.
+Copy the contents of `src` into the "include path" of your project.
 
 **Usage Client**
 ```php
@@ -31,7 +31,7 @@ Get your API key and secret here: https://www.coinqvest.com/en/api-settings
 
 **Create a Customer** (https://www.coinqvest.com/en/api-docs#post-customer)
 
-Creates a customer object, which can be associated with checkouts, payments and invoices. Checkouts associated with a customer generate more transaction details, help with your accounting and can automatically create invoices for your customer and yourself.
+Creates a customer object, which can be associated with checkouts, payments, and invoices. Checkouts associated with a customer generate more transaction details, help with your accounting, and can automatically create invoices for your customer and yourself.
 
 ```php
 $response = $client->post('/customer', array(
@@ -58,7 +58,7 @@ if ($response->httpStatusCode == 200) {
 
 Hosted checkouts are the simplest form of getting paid using the COINQVEST platform. 
 
-Using this endpoint, your server submits a set of parameters, such as the payment details including optional tax items, customer information, and settlement currency. Then your server receives a checkout URL in return, which can then be displayed back to your customer. 
+Using this endpoint, your server submits a set of parameters, such as the payment details including optional tax items, customer information, and settlement currency. Your server then receives a checkout URL in return, which is displayed back to your customer. 
 
 Upon visiting the URL, your customer is presented with a checkout page hosted on COINQVEST servers. This page displays all the information the customer needs to complete payment.
 
