@@ -109,7 +109,7 @@ if ($response->httpStatusCode == 200) {
 Once the payment is captured we notify you via email, [WEBHOOK /payment](https://www.coinqvest.com/en/api-docs#webhook-payment), or you can poll [GET /checkout](https://www.coinqvest.com/en/api-docs#get-checkout) for payment status updates:
 
 ```php
-;$response = $client->get('/checkout', array('id' => $checkoutId));
+$response = $client->get('/checkout', array('id' => $checkoutId));
 
 if ($response->httpStatusCode == 200) {   
     $data = json_decode($response->responseBody, true);
