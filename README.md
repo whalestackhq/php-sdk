@@ -109,12 +109,12 @@ if ($response->httpStatusCode == 200) {
 Once the payment is captured we notify you via email, [WEBHOOK /payment](https://www.coinqvest.com/en/api-docs#webhook-payment), or you can poll [GET /checkout](https://www.coinqvest.com/en/api-docs#get-checkout) for payment status updates:
 
 ```php
-$response = $client->get('/checkout', array('id' => $checkoutId));
+;$response = $client->get('/checkout', array('id' => $checkoutId));
 
 if ($response->httpStatusCode == 200) {   
     $data = json_decode($response->responseBody, true);
     $state = $data['checkout']['state'];
-    if (in_array($state, array('COMPLETED', 'DELAYED_COMPLETED', 'RESOLVED')) {
+    if (in_array($state, array('COMPLETED', 'DELAYED_COMPLETED', 'RESOLVED'))) {
         echo "The payment has completed and your account was credited. You can now ship the goods."
     } else {
         // try again in 30 seconds or so...
@@ -175,7 +175,7 @@ $response = $client->post('/withdrawal', array(
 ```php
 $response = $client->post('/customer', array(
     'customer' => array(
-        'id' => 'fd4f47a50c7f'
+        'id' => 'fd4f47a50c7f',
         'email' => 'new@email-address.com'
     )
 ));
@@ -192,7 +192,7 @@ $response = $client->delete('/customer', array(
 
 **List your 250 newest customers** (https://www.coinqvest.com/en/api-docs#get-customers)
 ```php
-$response = $client->get('/customers', array('limit' => 250);
+$response = $client->get('/customers', array('limit' => 250));
 ```
 
 **List all available blockchains** (https://www.coinqvest.com/en/api-docs#get-blockchains)
