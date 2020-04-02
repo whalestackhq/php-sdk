@@ -34,19 +34,17 @@ Get your API key and secret here: https://www.coinqvest.com/en/api-settings
 Creates a customer object, which can be associated with checkouts, payments, and invoices. Checkouts associated with a customer generate more transaction details, help with your accounting, and can automatically create invoices for your customer and yourself.
 
 ```php
-$response = $client->post('/customer', array(
-    'customer' => array(
-        'email' => 'john@doe.com',
-        'firstname' => 'John',
-        'lastname' => 'Doe',
-        'company' => 'ACME Inc.',
-        'adr1' => '810 Beach St',
-        'adr2' => 'Finance Department',
-        'zip' => 'CA 94133',
-        'city' => 'San Francisco',
-        'countrycode' => 'US'
-    )
-));
+$response = $client->post('/customer', array('customer' => array(
+    'email' => 'john@doe.com',
+    'firstname' => 'John',
+    'lastname' => 'Doe',
+    'company' => 'ACME Inc.',
+    'adr1' => '810 Beach St',
+    'adr2' => 'Finance Department',
+    'zip' => 'CA 94133',
+    'city' => 'San Francisco',
+    'countrycode' => 'US'
+)));
 
 if ($response->httpStatusCode == 200) {   
     $data = json_decode($response->responseBody, true);
@@ -173,21 +171,17 @@ $response = $client->post('/withdrawal', array(
 
 **Update a Customer** (https://www.coinqvest.com/en/api-docs#put-customer)
 ```php
-$response = $client->post('/customer', array(
-    'customer' => array(
+$response = $client->post('/customer', array('customer' => array(
         'id' => 'fd4f47a50c7f',
         'email' => 'new@email-address.com'
-    )
-));
+)));
 ```
 
 **Delete a Customer** (https://www.coinqvest.com/en/api-docs#delete-customer)
 ```php
-$response = $client->delete('/customer', array(
-    'customer' => array(
+$response = $client->delete('/customer', array('customer' => array(
         'id' => 'fd4f47a50c7f'
-    )
-));
+)));
 ```
 
 **List your 250 newest customers** (https://www.coinqvest.com/en/api-docs#get-customers)
