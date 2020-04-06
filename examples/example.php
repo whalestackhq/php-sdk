@@ -8,14 +8,18 @@ include('../src/CQMerchantClient.class.php');
  */
 
 /**
- * Let's create a COINQVEST Merchant API client
+ * Create a COINQVEST Merchant API client
  * The constructor takes your API Key, API Secret and an optional log file location as parameters
- * You API Key and Secret can be obtained here: https://www.coinqvest.com/en/api-settings
+ * Your API Key and Secret can be obtained here: https://www.coinqvest.com/en/api-settings
  */
-$client = new CQMerchantClient('YOUR-API-KEY', 'YOUR-API-SECRET', '/var/log/coinqvest.log');
+$client = new CQMerchantClient(
+    'YOUR-API-KEY',
+    'YOUR-API-SECRET',
+    '/var/log/coinqvest.log' // an optional log file location
+);
 
 /**
- * Let's invoke a request to GET /auth-test (https://www.coinqvest.com/en/api-docs#get-auth-test) to see if everything worked
+ * Invoke a request to GET /auth-test (https://www.coinqvest.com/en/api-docs#get-auth-test) to see if everything worked
  */
 $response = $client->get('/auth-test');
 
@@ -26,16 +30,16 @@ echo "Status Code: " . $response->httpStatusCode . "\n";
 echo "Response Body: " . $response->responseBody . "\n";
 
 /**
- * Let's check our USD wallet balance using GET /wallet (https://www.coinqvest.com/en/api-docs#get-wallet)
+ * Check our USD wallet balance using GET /wallet (https://www.coinqvest.com/en/api-docs#get-wallet)
  */
 $response = $client->get('/wallet', array('assetCode' => 'USD'));
 echo "Status Code: " . $response->httpStatusCode . "\n";
 echo "Response Body: " . $response->responseBody . "\n";
 
 /**
- * Let's create a checkout and get paid in two easy steps!
+ * Create a checkout and get paid in two easy steps!
  *
- * 1) It's good practice to associate payments with a customer, let's create one!
+ * It's good practice to associate payments with a customer, let's create one!
  * Invoke POST /customer (https://www.coinqvest.com/en/api-docs#post-customer) to create a new customer object.
  * Tip: At a minimum a customer needs an email address, but it's better to provide a full billing address for invoices.
  */
@@ -65,12 +69,12 @@ if ($response->httpStatusCode != 200) {
 // the customer was created
 $data = json_decode($response->responseBody, true);
 // $data now contains an object as specified in the success response here: https://www.coinqvest.com/en/api-docs#post-customer
-// let's extract the customer id to use it in our checkout below
+// extract the customer id to use it in our checkout below
 $customerId = $data['customerId'];
 
 /**
- * 2) We have a customer. Let's create a checkout for him/her.
- * We're creating a hosted checkout, which will provide a payment interface hosted on COINQVEST servers
+ * We now have a customer. Let's create a checkout for him/her.
+ * This creates a hosted checkout, which will provide a payment interface hosted on COINQVEST servers
  */
 
 $response = $client->post('/checkout/hosted', array(
@@ -90,21 +94,21 @@ $response = $client->post('/checkout/hosted', array(
                 'netAmount' => '0.5'
             )
         ),
-        'shippingCostItems' => array( // any shipping costs?
+        'shippingCostItems' => array( // an optional list of shipping and handling costs
             array(
                 'description' => 'Shipping and Handling',
                 'netAmount' => '3.99',
                 'taxable' => false // sometimes shipping costs are taxable
             )
         ),
-        'taxItems' => array( // any taxes?
+        'taxItems' => array( // an optional list of taxes
             array(
                 'name' => 'CA Sales Tax',
                 'percent' => '0.0825' // 8.25% CA sales tax
             )
         )
     ),
-    'settlementCurrency' => 'EUR' // specifies in which currency you want to settle
+    'c' => 'EUR' // specifies in which currency you want to settle
 ));
 
 echo "Status Code: " . $response->httpStatusCode . "\n";
