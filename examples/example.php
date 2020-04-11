@@ -108,7 +108,7 @@ $response = $client->post('/checkout/hosted', array(
             )
         )
     ),
-    'c' => 'EUR' // specifies in which currency you want to settle
+    'settlementCurrency' => 'EUR' // specifies in which currency you want to settle
 ));
 
 echo "Status Code: " . $response->httpStatusCode . "\n";
