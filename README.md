@@ -22,7 +22,11 @@ Copy the contents of `src` into the "include path" of your project.
 ```php
 include('CQMerchantClient.class.php');
 
-$client = new CQMerchantClient('YOUR-API-KEY', 'YOUR-API-SECRET', '/var/log/coinqvest.log');
+$client = new CQMerchantClient(
+    'YOUR-API-KEY',
+    'YOUR-API-SECRET',
+    '/var/log/coinqvest.log' // an optional log file location
+);
 ```
 
 Get your API key and secret here: https://www.coinqvest.com/en/api-settings
