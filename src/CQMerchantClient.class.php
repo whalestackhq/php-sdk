@@ -166,7 +166,7 @@ class CQMerchantClient extends CQRESTClient {
      */
     private function buildAuthHeaders($path, $method, $params = array()) {
 
-        $timestamp = time();
+        $timestamp = json_decode(file_get_contents('https://www.coinqvest.com/api/v1/time'))->time;
         $body = $method != 'GET' ? (count($params) ? json_encode($params) : null) : null;
         return array(
             'X-Digest-Key: ' . $this->key,
