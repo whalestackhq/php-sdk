@@ -157,7 +157,7 @@ class CQMerchantClient extends CQRESTClient {
     }
 
     /**
-     * Private class to automatically generate authentication headers.
+     * Automatically generates authentication headers.
      *
      * @param $path
      * @param $method
@@ -166,15 +166,34 @@ class CQMerchantClient extends CQRESTClient {
      */
     private function buildAuthHeaders($path, $method, $params = array()) {
 
-        $serverTime = @file_get_contents('https://www.coinqvest.com/api/v1/time');
-        $serverTime = $serverTime === false ? null : json_decode($serverTime);
-        $timestamp = is_null($serverTime) ? time() : $serverTime->time;
+        $timestamp = self::fetchTimestamp();
         $body = $method != 'GET' ? (count($params) ? json_encode($params) : null) : null;
+
         return array(
             'X-Digest-Key: ' . $this->key,
             'X-Digest-Signature: ' . hash_hmac('sha256', $path . $timestamp . $method . $body, $this->secret),
             'X-Digest-Timestamp: ' . $timestamp
         );
+
+    }
+
+    /**
+     * Fetches server timestamp or falls back to local time on error
+     *
+     * @return int
+     */
+    private function fetchTimestamp() {
+
+        $timestamp = time();
+        $client = new CQRESTClient('https', 'www.coinqvest.com', '/api/v1');
+
+        $response = $client->sendRequest('/time', 'GET');
+        if ($response->httpStatusCode != 200) {
+            return $timestamp;
+        }
+
+        $data = json_decode($response->responseBody, true);
+        return is_null($data) ? $timestamp : $data['time'];
 
     }
 
