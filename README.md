@@ -134,23 +134,10 @@ $response = $client->get('/wallet', array('assetCode' => 'USD'));
 $response = $client->get('/wallets');
 ```
 
-**Withdraw to your NGN Bank Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
+**Withdraw USD to your Bitcoin Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
 ```php
 $response = $client->post('/withdrawal', array(
-    'sourceAsset' => 'USD:GDUKMGUGDZQK6YHYA5Z6AY2G4XDSZPSZ3SW5UN3ARVMO6QSRDWP5YLEX', // withdraw from your USD wallet
-    'sourceAmount' => '100',
-    'targetNetwork' => 'NGN', // send to an NGN bank account
-    'targetAccount' => array(
-        'nuban' => '3080494548',
-        'bankName' => 'FirstBank'
-    )
-));
-```
-
-**Withdraw to your Bitcoin Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
-```php
-$response = $client->post('/withdrawal', array(
-    'sourceAsset' => 'USD:GDUKMGUGDZQK6YHYA5Z6AY2G4XDSZPSZ3SW5UN3ARVMO6QSRDWP5YLEX', // withdraw from your USD wallet
+    'sourceAsset' => 'USDC:GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN', // withdraw from your USDC wallet
     'sourceAmount' => '100',
     'targetNetwork' => 'BTC', // send to a BTC address
     'targetAccount' => array(
@@ -159,10 +146,10 @@ $response = $client->post('/withdrawal', array(
 ));
 ```
 
-**Withdraw to your Stellar Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
+**Withdraw USD to your Stellar Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
 ```php
 $response = $client->post('/withdrawal', array(
-    'sourceAsset' => 'USD:GDUKMGUGDZQK6YHYA5Z6AY2G4XDSZPSZ3SW5UN3ARVMO6QSRDWP5YLEX', // withdraw from your USD wallet
+    'sourceAsset' => 'USDC:GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN', // withdraw from your USDC wallet
     'sourceAmount' => '100',
     'targetNetwork' => 'XLM', // send to a Stellar account
     'targetAccount' => array(
@@ -193,21 +180,21 @@ $response = $client->delete('/customer', array('customer' => array(
 $response = $client->get('/customers', array('limit' => 250));
 ```
 
-**List all available blockchains** (https://www.coinqvest.com/en/api-docs#get-blockchains)
+**List all available assets** (https://www.coinqvest.com/en/api-docs#get-assets)
 ```php
-$response = $client->get('/blockchains');
+$response = $client->get('/assets');
 ```
 
-**List all available fiat currencies** (https://www.coinqvest.com/en/api-docs#get-fiat-currencies)
+**List all available networks** (https://www.coinqvest.com/en/api-docs#get-networks)
 ```php
-$response = $client->get('/fiat-currencies');
+$response = $client->get('/networks');
 ```
 
-Please inspect https://www.coinqvest.com/en/api-docs for detailed API documentation or send us an email to service@coinqvest.com.
+Please inspect https://www.coinqvest.com/en/api-docs for detailed API documentation or email us at service@coinqvest.com if you have questions.
 
 Support and Feedback
 --------------------
-Your feedback is appreciated! If you have specific problems or bugs with this SDK, please file an issue on Github. For general feedback and support requests, send an email to service@coinqvest.com.
+We'd love to hear your feedback. If you have specific problems or bugs with this SDK, please file an issue on GitHub. For general feedback and support requests, send an email to service@coinqvest.com.
 
 Contributing
 ------------
