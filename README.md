@@ -134,7 +134,7 @@ $response = $client->get('/wallet', array('assetCode' => 'USD'));
 $response = $client->get('/wallets');
 ```
 
-**Withdraw USD to your Bitcoin Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
+**Withdraw USDC to your Bitcoin Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
 ```php
 $response = $client->post('/withdrawal', array(
     'sourceAsset' => 'USDC:GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN', // withdraw from your USDC wallet
@@ -146,7 +146,7 @@ $response = $client->post('/withdrawal', array(
 ));
 ```
 
-**Withdraw USD to your Stellar Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
+**Withdraw USDC to your Stellar Account** (https://www.coinqvest.com/en/api-docs#post-withdrawal)
 ```php
 $response = $client->post('/withdrawal', array(
     'sourceAsset' => 'USDC:GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN', // withdraw from your USDC wallet
@@ -194,7 +194,7 @@ Please inspect https://www.coinqvest.com/en/api-docs for detailed API documentat
 
 Support and Feedback
 --------------------
-We'd love to hear your feedback. If you have specific problems or bugs with this SDK, please file an issue on GitHub. For general feedback and support requests, send an email to service@coinqvest.com.
+We'd love to hear your feedback. If you have specific problems or bugs with this SDK, please file an issue on GitHub. For general feedback and support requests please email service@coinqvest.com.
 
 Contributing
 ------------
