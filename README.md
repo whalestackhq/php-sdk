@@ -96,7 +96,7 @@ $response = $client->post('/checkout/hosted', array(
             )
         )
     ),
-    'settlementCurrency' => 'EUR' // specifies in which currency you want to settle 
+    'settlementCurrency' => 'USDC:GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN' // specifies the asset you want to be credited in when the checkout completes 
 ));
 
 if ($response->httpStatusCode == 200) {   
@@ -116,7 +116,7 @@ $response = $client->get('/checkout', array('id' => $checkoutId));
 if ($response->httpStatusCode == 200) {   
     $data = json_decode($response->responseBody, true);
     $state = $data['checkout']['state'];
-    if (in_array($state, array('COMPLETED', 'DELAYED_COMPLETED', 'RESOLVED'))) {
+    if ($state == 'CHECKOUT_COMPLETED')) {
         echo "The payment has completed and your account was credited. You can now ship the goods."
     } else {
         // try again in 30 seconds or so...
