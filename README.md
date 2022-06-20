@@ -68,7 +68,7 @@ Upon visiting the URL, your customer is presented with a checkout page hosted on
 $response = $client->post('/checkout/hosted', array(
     'charge' => array(
         'customerId' => $customerId, // associates this charge with a customer
-        'currency' => 'USD', // specifies the billing currency
+        'billingCurrency' => 'USD', // specifies the billing currency
         'lineItems' => array( // a list of line items included in this charge
             array(
                 'description' => 'T-Shirt',
@@ -96,7 +96,7 @@ $response = $client->post('/checkout/hosted', array(
             )
         )
     ),
-    'settlementCurrency' => 'USDC:GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN' // specifies the asset you want to be credited in when the checkout completes 
+    'settlementAsset' => 'USDC:GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN' // specifies the asset you want to be credited in when the checkout completes 
 ));
 
 if ($response->httpStatusCode == 200) {   
@@ -139,7 +139,7 @@ $response = $client->get('/wallets');
 $response = $client->post('/withdrawal', array(
     'sourceAsset' => 'USDC:GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN', // withdraw from your USDC wallet
     'sourceAmount' => '100',
-    'targetNetwork' => 'BTC', // send to a BTC address
+    'targetNetwork' => 'BITCOIN', // send to a Bitcoin address
     'targetAccount' => array(
         'address' => 'bc1qj633nx575jm28smgcp3mx6n3gh0zg6ndr0ew23'
     )
@@ -151,7 +151,7 @@ $response = $client->post('/withdrawal', array(
 $response = $client->post('/withdrawal', array(
     'sourceAsset' => 'USDC:GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN', // withdraw from your USDC wallet
     'sourceAmount' => '100',
-    'targetNetwork' => 'XLM', // send to a Stellar account
+    'targetNetwork' => 'STELLAR', // send to a Stellar account
     'targetAccount' => array(
         'account' => 'GDONUHZKLSYLDOZWR2TDW25GFXOBWCCKTPK34DLUVSOMFHLGURX6FNU6',
         'memo' => 'Exodus',
