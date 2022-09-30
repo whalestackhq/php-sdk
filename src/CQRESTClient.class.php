@@ -20,7 +20,7 @@ class CQRESTClient {
     }
 
     /**
-     * Sends an arbitrate HTTP GET, POST, PUT or DELETE request
+     * Sends an arbitrary HTTP GET, POST, PUT or DELETE request
      *
      * @param $endpoint
      * @param $requestType
