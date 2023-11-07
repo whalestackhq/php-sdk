@@ -1,10 +1,10 @@
 <?php
 /**
- * Class CQRESTClient
+ * Class WsRESTClient
  *
- * The base class for the COINQVEST Merchant API client.
+ * The base class for the Whalestack Payments API client.
  */
-class CQRESTClient {
+class WsRESTClient {
 
     protected $scheme;
     protected $host;
@@ -29,16 +29,16 @@ class CQRESTClient {
      * @param array $query
      * @param array $headers
      * @param array $customOptions
-     * @return CQRESTClientResponseObject
+     * @return WsRESTClientResponse
      */
     protected function sendRequest($endpoint, $requestType, $requestBody = array(), $sendAsJson = false, $query = array(), $headers = array(), $customOptions = array()) {
 
         $ch = curl_init($this->scheme . '://' . $this->host . $this->path . $endpoint . (!empty($query) ? '?' . http_build_query($query) : null));
-        curl_setopt($ch, CURLOPT_PORT, $this->port ? $this->port : ($this->scheme == 'https' ? 443 : 80));
+        curl_setopt($ch, CURLOPT_PORT, $this->port ?: ($this->scheme == 'https' ? 443 : 80));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_AUTOREFERER, true);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'COINQVEST REST Client (Base)');
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Whalestack REST Client (PHP)');
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 15);
         curl_setopt($ch, CURLOPT_TIMEOUT, 180);
         curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
@@ -50,8 +50,8 @@ class CQRESTClient {
             curl_setopt($ch, CURLOPT_USERPWD, $this->basicAuthUsername . ":" . $this->basicAuthPassword);
         }
 
-        array_push($headers, 'Expect:'); // prevent "HTTP/1.1 100 Continue"
-        array_push($headers, 'Content-Type: application/json; charset=UTF-8'); // set content-type
+        $headers[] = 'Expect:'; // prevent "HTTP/1.1 100 Continue"
+        $headers[] = 'Content-Type: application/json; charset=UTF-8'; // set content-type
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         switch ($requestType) {
@@ -87,7 +87,7 @@ class CQRESTClient {
             list($responseHeaders, $responseBody) = explode($separator, $response, 2);
         }
 
-        $restClientResponseObject = new CQRESTClientResponseObject(
+        $restClientResponseObject = new WsRESTClientResponse(
             $responseBody,
             $responseHeaders,
             curl_getinfo($ch, CURLINFO_HTTP_CODE),

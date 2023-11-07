@@ -1,10 +1,10 @@
 <?php
 /**
- * Class CQLoggingService
+ * Class WsLoggingService
  *
  * A logging service
  */
-class CQLoggingService {
+class WsLoggingService {
 
     /**
      * Writes to a log file and prepends current time stamp

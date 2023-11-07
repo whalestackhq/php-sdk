@@ -1,10 +1,10 @@
 <?php
 /**
- * Class CQRESTClientResponseObject
+ * Class WsRESTClientResponse
  *
- * An instance of this class is returned by the get, post, put or delete methods in CQMerchantClient
+ * An instance of this class is returned by the get, post, put or delete methods in WsClient
  */
-class CQRESTClientResponseObject {
+class WsRESTClientResponse {
 
     /**
      * Contains the HTTP response in plain text. Usually this is a JSON string
@@ -19,7 +19,7 @@ class CQRESTClientResponseObject {
     var $responseHeaders = null;
 
     /**
-     * The numeric HTTP status code, as given by the COINQVEST server
+     * The numeric HTTP status code, as given by the Whalestack server
      * @var integer
      */
     var $httpStatusCode = null;
